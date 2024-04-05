@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,8 @@ import { Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   correo:string;
   contrasenia:string;
+
+  faLock = faLock;
 
   constructor(private authService: AuthService, private router: Router){ }
 
@@ -29,4 +32,5 @@ export class LoginComponent implements OnInit {
         }
       );
   }
+
 }
