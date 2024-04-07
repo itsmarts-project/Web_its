@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
-import { faLock } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-login',
@@ -9,28 +8,24 @@ import { faLock } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  correo:string;
-  contrasenia:string;
+  correo: string;
+  contrasenia: string;
 
-  faLock = faLock;
-
-  constructor(private authService: AuthService, private router: Router){ }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
-    
   }
 
-  login(): void{
+  login(): void {
     this.authService.login(this.correo, this.contrasenia)
       .subscribe(
-        (response)=>{
-          console.log('Inicio de sesion exitoso', response);
-          this.router.navigate(['/menu']);
+        (response) => {
+          console.log('Inicio de sesión exitoso');
+          this.router.navigateByUrl('/menu', { replaceUrl: true });
         },
-        (error)=>{
-          console.log('Error al iniciar sesion', error)
+        (error) => {
+          console.log('Error al iniciar sesión', error);
         }
       );
   }
-
 }

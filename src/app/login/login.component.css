@@ -10,37 +10,37 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  
-  .background-container::before {
+}
+
+.background-container::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Filtro oscuro semi-transparente */
-  }
-  
-  .form-container {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.form-container {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 30px;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     max-width: 400px;
     width: 100%;
-    z-index: 1; /* Asegura que el formulario esté por encima del filtro */
-    position: relative; /* Necesario para el z-index */
-  }
-  
-  .logo-container {
+    z-index: 1;
+    position: relative;
+}
+
+.logo-container {
     text-align: center;
     margin-bottom: 30px;
-  }
-  
-  .logo {
+}
+
+.logo {
     max-width: 200px;
-  }
+}
 
 .form-title {
     color: #1E91E2;
@@ -51,6 +51,10 @@
 .form-group {
     position: relative;
     margin-bottom: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .icon {
@@ -64,16 +68,15 @@
 .form-group input {
     width: 100%;
     padding: 12px 12px 12px 35px;
-    /* Aumenta el padding izquierdo para que quepan los iconos */
     border: 1px solid #ccc;
     border-radius: 4px;
     box-sizing: border-box;
-    /* Incluye el padding en el ancho total */
+    background: #00000000;
 }
 
 .form-options {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     margin-bottom: 20px;
 }
@@ -81,33 +84,141 @@
 .remember-me {
     display: flex;
     align-items: center;
+    font-size: 16px;
+    color: #7E7E7E;
 }
 
 .remember-me input[type="checkbox"] {
-    margin-right: 5px;
+    margin-left: 5px;
 }
 
 .forgot-password {
+    display: inline-block;
+    text-align: center;
+    color: #7E7E7E;
+    transition: color 0.2s;
+    margin-bottom: 5px;
+}
+
+.forgot-password:hover {
     color: #0066cc;
+    transition-delay: 0.2s;
+}
+
+.recovery-link {
+    color: #FF9900;
     text-decoration: none;
 }
 
 .submit-btn {
     width: 100%;
     padding: 10px;
-    background-color: #0066cc;
+    background-color: #00548F;
     color: #fff;
     border: none;
-    border-radius: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.submit-btn:hover {
+    background-color: #0066cc;
+    transition-delay: 0.2s;
+}
+
+.checkbox-wrapper-46 {
+    display: inline-flex;
+    align-items: center;
+}
+
+.checkbox-wrapper-46 input[type="checkbox"] {
+    display: none;
+    visibility: hidden;
+}
+
+.checkbox-wrapper-46 .cbx {
+    display: flex;
+    align-items: center;
+    margin: auto;
+    -webkit-user-select: none;
+    user-select: none;
     cursor: pointer;
 }
 
-.password-recovery {
-    text-align: center;
-    margin-top: 10px;
+.checkbox-wrapper-46 .cbx span {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
 }
 
-.recovery-link {
-    color: #0066cc;
-    text-decoration: none;
+.checkbox-wrapper-46 .cbx span:first-child {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    transform: scale(1);
+    vertical-align: middle;
+    border: 1px solid #9098A9;
+    transition: all 0.2s ease;
+}
+
+.checkbox-wrapper-46 .cbx span:first-child svg {
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    fill: none;
+    stroke: #FFFFFF;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+}
+
+.checkbox-wrapper-46 .cbx span:first-child:before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    background: #506EEC;
+    display: block;
+    transform: scale(0);
+    opacity: 1;
+    border-radius: 50%;
+}
+
+.checkbox-wrapper-46 .cbx span:last-child {
+    padding-right: 4px;
+}
+
+.checkbox-wrapper-46 .cbx:hover span:first-child {
+    border-color: #506EEC;
+}
+
+.checkbox-wrapper-46 .inp-cbx:checked+.cbx span:first-child {
+    background: #506EEC;
+    border-color: #506EEC;
+    animation: wave-46 0.4s ease;
+}
+
+.checkbox-wrapper-46 .inp-cbx:checked+.cbx span:first-child svg {
+    stroke-dashoffset: 0;
+}
+
+.checkbox-wrapper-46 .inp-cbx:checked+.cbx span:first-child:before {
+    transform: scale(3.5);
+    opacity: 0;
+    transition: all 0.6s ease;
+}
+
+@keyframes wave-46 {
+    50% {
+        transform: scale(0.9);
+    }
+}
+
+.checkbox-wrapper-46 .cbx .checkbox-text {
+    margin-left: 8px;
 }
