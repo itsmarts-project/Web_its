@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { LoginComponent } from './login/login.component';
-import { MenuComponent } from './menu/menu.component';
+import { MenuCapturadorComponent } from './menu-capturador/menu-capturador.component';
+import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 
 const routes: Routes = [
   { path: '', component: SplashScreenComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'menu', component: MenuComponent },
+  { path: 'menu-admin', component: MenuAdminComponent },
+  { path: 'menu-capturador', component: MenuCapturadorComponent },
   { path: '**', redirectTo:''}
 ];
 

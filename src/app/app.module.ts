@@ -8,14 +8,19 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { LoginComponent } from './login/login.component';
-import { MenuComponent } from './menu/menu.component';
+import { MenuCapturadorComponent } from './menu-capturador/menu-capturador.component';
+import { MenuAdminComponent } from './menu-admin/menu-admin.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SplashScreenComponent,
     LoginComponent,
-    MenuComponent
+    MenuAdminComponent,
+    MenuCapturadorComponent,
+    MenuAdminComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

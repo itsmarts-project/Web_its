@@ -19,12 +19,29 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.authService.login(this.correo, this.contrasenia)
       .subscribe(
-        (response) => {
+        (_response_) => {
           console.log('Inicio de sesión exitoso');
-          this.router.navigateByUrl('/menu', { replaceUrl: true });
+          this.obtenerRolUsuario();
+        },
+        (_error_) => {
+          console.log('Error al iniciar sesión', _error_);
+        }
+      );
+  }
+
+  obtenerRolUsuario(): void {
+    this.authService.getRolUsuario(this.correo)
+      .subscribe(
+        (response) => {
+          const rol = response.rol; // Asume que el rol viene en la respuesta del API
+          if (rol === 'AD') {
+            this.router.navigate(['/menu-admin']);
+          } else if (rol === 'CA') {
+            this.router.navigate(['/menu-capturador']);
+          }
         },
         (error) => {
-          console.log('Error al iniciar sesión', error);
+          console.log('Error al obtener el rol del usuario', error);
         }
       );
   }
