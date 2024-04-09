@@ -11,6 +11,9 @@ import { LoginComponent } from './login/login.component';
 import { MenuCapturadorComponent } from './menu-capturador/menu-capturador.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { RegistroCandidatosComponent } from './registro-candidatos/registro-candidatos.component';
+import { EstatusVisitaComponent } from './estatus-visita/estatus-visita.component';
+import { PermisosUsuarioComponent } from './permisos-usuario/permisos-usuario.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,10 @@ import { NavbarComponent } from './navbar/navbar.component';
     MenuAdminComponent,
     MenuCapturadorComponent,
     MenuAdminComponent,
-    NavbarComponent
+    NavbarComponent,
+    RegistroCandidatosComponent,
+    EstatusVisitaComponent,
+    PermisosUsuarioComponent
   ],
   imports: [
     BrowserModule,

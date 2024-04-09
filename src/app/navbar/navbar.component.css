@@ -67,3 +67,42 @@ nav {
   .icon {
     font-size: 24px;
   }
+
+  @media (max-width: 768px) {
+    nav {
+      height: auto;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 10px;
+    }
+  
+    .nav-links {
+      margin-left: 0;
+      margin-top: 10px;
+      width: 100%;
+      justify-content: space-between;
+    }
+  
+    .user-info {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .user-text {
+      margin-right: 0;
+      text-align: left;
+    }
+  
+    .nav-icons {
+      margin-right: 10px;
+    }
+  
+    .nav-icons a {
+      margin-right: 10px;
+    }
+  
+    .user-icon {
+      margin-right: 0;
+      margin-bottom: 10px;
+    }
+  }
