@@ -1,1 +1,140 @@
-<p>registro-candidatos works!</p>
+<app-navbar></app-navbar>
+
+<form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <!-- 5 inputs de texto -->
+    <div class="logo-title">
+        <img src="../../assets/brand-gris.png" alt="logo">
+        <h1>DATOS GENERALES</h1>
+    </div>
+    <div class="container">
+        <div class="column-1">
+            <div class="form-group">
+                <label>Nombre completo</label>
+                <input type="text" formControlName="input1" placeholder="Nombre completo">
+            </div>
+            <div class="form-group">
+                <label>Edad</label>
+                <input type="text" formControlName="input2" placeholder="Edad">
+            </div>
+            <div class="form-group">
+                <label>Nombre de la institución</label>
+                <input type="text" formControlName="input3" placeholder="Nombre de la institución">
+            </div>
+            <div class="form-group">
+                <label>Grado de escolaridad</label>
+                <input type="text" formControlName="input4" placeholder="Grado de escolaridad">
+            </div>
+            <div class="form-group">
+                <label>Monto</label>
+                <input type="number" formControlName="input5" placeholder="Monto">
+            </div>
+        </div>
+    
+        <!-- 1 input para pedir foto -->
+        <div class="column-2">
+            <div class="form-group">
+                <input type="file" formControlName="photo" (change)="onFileSelected($event)">
+                <img [src]="previewUrl" *ngIf="previewUrl" alt="Vista previa de la imagen">
+            </div>
+        </div>
+    </div>
+    --------------------------------------PRIMER DIV FINALIZA-----------------------------------------------------
+    <!-- 5 inputs de texto -->
+    <div class="form-group">
+        <label>Calle:</label>
+        <input type="text" formControlName="input6" placeholder="Calle">
+    </div>
+
+    <div class="form-group">
+        <label>Colonia:</label>
+        <input type="text" formControlName="input7" placeholder="Colonia">
+    </div>
+
+    <div class="form-group">
+        <label>Entre calles:</label>
+        <input type="text" formControlName="input8" placeholder="Entre calles">
+    </div>
+
+    <div class="form-group">
+        <label>No. Int:</label>
+        <input type="text" formControlName="input9" placeholder="No.Int">
+    </div>
+
+    <div class="form-group">
+        <label>No. Ext:</label>
+        <input type="text" formControlName="input10" placeholder="No.Ext">
+    </div>
+
+    <!-- 1 contenedor para desplegar un mapa -->
+    <div id="map"></div>
+
+
+    <!-- 1 pregunta con radio button -->
+    <div class="form-group">
+        <label>Donde vives es:</label>
+        <div>
+            <label>
+                <input type="radio" formControlName="radioOption" value="option1">
+                Casa propia
+            </label>
+            <label>
+                <input type="radio" formControlName="radioOption" value="option2">
+                Renta
+            </label>
+        </div>
+    </div>
+
+    <!-- 8 inputs de texto -->
+    <div class="form-group">
+        <label>¿Cuántas personas viven en el domicilio?</label>
+        <input type="text" formControlName="input11" placeholder="Cuantas personas viven en el domicilio?">
+    </div>
+
+    <div class="form-group">
+        <label>¿Cuántos hermanos(as) tienes? (Sin contarte a tí)</label>
+        <input type="text" formControlName="input12" placeholder="¿Cuántos hermanos(as) tienes? (Sin contarte a tí)">
+    </div>
+
+    <div class="form-group">
+        <label>Sin contar pasillos y baños, ¿cuántas habitaciones de tu hogar son utilizadas para dormir?</label>
+        <input type="text" formControlName="input13"
+            placeholder="Sin contar pasillos y baños, ¿cuántas habitaciones de tu hogar son utilizadas para dormir? ">
+    </div>
+
+    <div class="form-group">
+        <label>¿Cuántos baños con regadera y escusado hay en tu hogar?</label>
+        <input type="text" formControlName="input14"
+            placeholder="¿Cuántos baños con regadera y escusado hay en tu hogar?">
+    </div>
+
+    <div class="form-group">
+        <label>¿Cuántos vehículos tienes en tu hogar?</label>
+        <input type="text" formControlName="input15" placeholder="¿Cuántos vehículos tienes en tu hogar?">
+    </div>
+
+    <div class="form-group">
+        <label>Sin considerar los datos móviles de tu celular, ¿tu casa cuenta con conexión a internet?</label>
+        <input type="text" formControlName="input16"
+            placeholder="Sin considerar los datos móviles de tu celular, ¿tu casa cuenta con conexión a internet?">
+    </div>
+
+    <div class="form-group">
+        <label>¿Recibes tú o algún miembro de la familia alguna beca de estudios?</label>
+        <input type="text" formControlName="input17"
+            placeholder="¿Recibes tú o algún miembro de la familia alguna beca de estudios?">
+    </div>
+
+    <div class="form-group">
+        <label>¿Recibes tú o algún miembro de la familia alguna beca de estudios?</label>
+        <input type="text" formControlName="input18"
+            placeholder="¿Recibes tú o algún miembro de la familia alguna beca de estudios?">
+    </div>
+
+    <div class="form-group">
+        <label>¿Recibes tú o algún miembro de la familia alguna beca de estudios?</label>
+        <input type="text" formControlName="input19"
+            placeholder="¿Recibes tú o algún miembro de la familia alguna beca de estudios?">
+    </div>
+
+    <button type="submit">Enviar</button>
+</form>
