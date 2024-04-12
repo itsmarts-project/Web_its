@@ -1,0 +1,52 @@
+<app-navbar></app-navbar>
+<form (ngSubmit)="onSubmit()">
+    <p>Informacion Personal</p><br>
+    <input type="text" [(ngModel)]="data.solicitante.nombre" placeholder="Nombre" name="nombre"><br>
+    <input type="text" [(ngModel)]="data.solicitante.primerApellido" placeholder="Primer Apellido" name="primerApellido"><br>
+    <input type="text" [(ngModel)]="data.solicitante.segundoApellido" placeholder="Segundo Apellido" name="segundoApellido"><br>
+    <label for="genero">Genero</label>
+    <select name="genero" id="genero" [(ngModel)]="data.solicitante.genero">
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+    </select><br>
+    <input type="text" [(ngModel)]="data.solicitante.edad" placeholder="Edad" name="edad"><br>
+    <input type="text" [(ngModel)]="data.solicitante.correo" placeholder="Correo" name="correo"><br>
+    <input type="number" [(ngModel)]="data.solicitante.montoSolicitado" placeholder="Monto Solicitado" name="montoSolicitado"><br>
+    <input type="text" [(ngModel)]="data.solicitante.universidad" placeholder="Universidad" name="universidad"><br>
+    <p>Domicilio</p><br>
+    <input type="text" [(ngModel)]="data.domicilio.calle" placeholder="Calle" name="calle"><br>
+    <input type="text" [(ngModel)]="data.domicilio.numeroExterior" placeholder="Numero Exterior" name="numeroExterior"><br>
+    <input type="text" [(ngModel)]="data.domicilio.numeroInterior" placeholder="Numero Interior" name="numeroInterior"><br>
+    <input type="text" [(ngModel)]="data.domicilio.colonia" placeholder="Colonia" name="colonia"><br>
+    <input type="text" [(ngModel)]="data.domicilio.ciudad" placeholder="Ciudad" name="ciudad"><br>
+    <input type="text" [(ngModel)]="data.domicilio.estado" placeholder="Estado" name="estado"><br>
+    <input type="text" [(ngModel)]="data.domicilio.latitud" placeholder="Latitud" name="latitud"><br>
+    <input type="text" [(ngModel)]="data.domicilio.longitud" placeholder="Longitud" name="longitud"><br>
+    <p>Formulario</p>
+    <label for="pregunta1">Dondé vives es...</label>
+    <select name="pregunta1" id="pregunta1" [(ngModel)]="data.formulario.pregunta1">
+        <option value="Casa Propia">Casa Propia</option>
+        <option value="Renta">Renta</option>
+    </select><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta2" placeholder="¿Cuantas personas viven en el domicilio?" name="pregunta2"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta3" placeholder="¿Cuántos hermanos(as) tienes? (Sin contarte a tí)" name="pregunta3"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta4" placeholder="Sin contar pasillos y baños, ¿cuántas habitaciones de tu hogar son utilizadas para dormir? " name="pregunta4"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta5" placeholder="¿Cuántos baños con regadera y escusado hay en tu hogar?" name="pregunta5"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta6" placeholder="¿Cuántos vehículos tienes en tu hogar?" name="pregunta6"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta7" placeholder="	Sin considerar los datos móviles de tu celular, ¿tu casa cuenta con conexión a internet?" name="pregunta7"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta8" placeholder="¿Recibes tú o algún miembro de la familia alguna beca de estudios?" name="pregunta8"><br>
+    <p>¿En tu casa tienen o tu dispones de ...  </p><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta9" placeholder="Televisión" name="pregunta9"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta10" placeholder="Videocasetera o DVD" name="pregunta10"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta11" placeholder="Refrigerador" name="pregunta11"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta12" placeholder="Estufa de gas" name="pregunta12"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta13" placeholder="Calentador" name="pregunta13"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta14" placeholder="Lavadora" name="pregunta14"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta15" placeholder="Automóvil" name="pregunta15"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta16" placeholder="Microondas" name="pregunta16"><br>
+    <input type="text" [(ngModel)]="data.formulario.pregunta17" placeholder="Computadora" name="pregunta17"><br>
+    <!--  Agrega los demas campos del solicitante, domicilio y formulario aqui  -->
+
+    <input type="file" (change)="handleFileInput($event)" accept="image/*"><br>
+    <button type="submit">Enviar Solicitud</button>
+</form>

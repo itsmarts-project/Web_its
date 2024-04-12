@@ -11,9 +11,10 @@ import { LoginComponent } from './login/login.component';
 import { MenuCapturadorComponent } from './menu-capturador/menu-capturador.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { RegistroCandidatosComponent } from './registro-candidatos/registro-candidatos.component';
-import { EstatusVisitaComponent } from './estatus-visita/estatus-visita.component';
 import { PermisosUsuarioComponent } from './permisos-usuario/permisos-usuario.component';
+import { FormularioSolicitudComponent } from './formulario-solicitud/formulario-solicitud.component';
+import { SolicitanteTableComponent } from './solicitante-table/solicitante-table.component';
+import { EditarSolicitanteComponent } from './editar-solicitante/editar-solicitante.component';
 
 @NgModule({
   declarations: [
@@ -24,9 +25,10 @@ import { PermisosUsuarioComponent } from './permisos-usuario/permisos-usuario.co
     MenuCapturadorComponent,
     MenuAdminComponent,
     NavbarComponent,
-    RegistroCandidatosComponent,
-    EstatusVisitaComponent,
-    PermisosUsuarioComponent
+    PermisosUsuarioComponent,
+    FormularioSolicitudComponent,
+    SolicitanteTableComponent,
+    EditarSolicitanteComponent
   ],
   imports: [
     BrowserModule,

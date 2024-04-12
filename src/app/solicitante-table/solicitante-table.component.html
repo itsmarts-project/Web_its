@@ -1,0 +1,38 @@
+<app-navbar></app-navbar>
+
+<h2>Tabla de Solicitantes</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Nombre</th>
+      <th>Apellidos</th>
+      <th>Correo</th>
+      <th>Fecha Alta</th>
+      <th>Estatus</th>
+      <th>Universidad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let solicitante of solicitantes">
+      <td>{{ solicitante.idSolicitante }}</td>
+      <td>{{ solicitante.nombre }}</td>
+      <td>{{ solicitante.primerApellido }} {{ solicitante.segundoApellido }}</td>
+      <td>{{ solicitante.correo }}</td>
+      <td>{{ solicitante.fechaAlta }}</td>
+      <td>{{ solicitante.estatus }}</td>
+      <td>{{ solicitante.universidad }}</td>
+      <td>
+        <button (click)="editarSolicitante(solicitante)">Editar</button>
+        <button (click)="aceptarSolicitante(solicitante)">Aceptar</button>
+        <select [(ngModel)]="solicitante.estatus">
+          <option value="autorizado">Autorizado</option>
+          <option value="rechazado">Rechazado</option>
+        </select>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<button (click)="exportarPDF()">Exportar a PDF</button>

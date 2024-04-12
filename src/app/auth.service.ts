@@ -15,16 +15,17 @@ export class AuthService {
 
   getRolUsuario(correo: string): Observable<any> {
     const body = { correo };
-    return this.http.post('http://localhost:8080/usuarios/traerRolUsuario', body)
+    return this.http.post('http://localhost:8080/usuario/traerRolUsuario', body)
       .pipe(
         map((response: any) => {
           return {
-            rol: response.rol,
-            idUsuario: response.id
+            rol: response.usuario.puesto,
+            idUsuario: response.usuario.idUsuario
           };
         })
       );
   }
+
 
   login(correo: string, contrasenia: string, idUsuario: string): Observable<any> {
     const body = { correo, contrasenia };

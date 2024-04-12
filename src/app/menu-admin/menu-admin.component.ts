@@ -11,11 +11,11 @@ export class MenuAdminComponent {
   constructor(private router: Router, private auth: AuthService){}
 
   navigateToRegistroCandidatos() {
-    this.router.navigate(['/registro-candidatos']);
+    this.router.navigate(['/formulario-solicitud']);
   }
 
   navigateToEstatusVisita(){
-    this.router.navigate(['/estatus-visita']);
+    this.router.navigate(['/solicitante-table']);
   }
 
   navigateToPermisosUsuario(){
