@@ -10,6 +10,7 @@ import { FormularioSolicitudComponent } from './formulario-solicitud/formulario-
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DesbloquearUsuarioComponent } from './desbloquear-usuario/desbloquear-usuario.component';
 
+
 const routes: Routes = [
   { path: '', component: SplashScreenComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent },

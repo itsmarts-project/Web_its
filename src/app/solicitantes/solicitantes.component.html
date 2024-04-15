@@ -1,35 +1,138 @@
 <app-navbar></app-navbar>
 <div class="container">
-    <div class="header">
-      <h2 class="title">LISTADO DE CANDIDATOS PARA APOYO</h2>
-      <button class="btn-export" (click)="exportarPDF()">Exportar a PDF</button>
-    </div>
-    <div class="table-container">
-      <table id="tabla">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Estatus</th>
-            <th>Monto aprobado</th>
-            <th>Catálogos</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let solicitante of solicitantes | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
-            <td>{{ solicitante.nombre }} {{ solicitante.primerApellido }} {{ solicitante.segundoApellido }}</td>
-            <td>{{ solicitante.estatus }}</td>
-            <td>{{ solicitante.montoAprobado }}</td>
-            <td>
-              <button class="btn btn-primary btn-sm"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>
-              <select #selectElement (change)="cambiarEstatus(solicitante, selectElement.value)" class="form-control form-control-sm">
-                <option value="---Seleccionar---">---Seleccionar---</option>
-                <option value="autorizar">Autorizar</option>
-                <option value="rechazar">Rechazar</option>
-              </select>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+  <div class="header">
+    <h2 class="title">LISTADO DE CANDIDATOS PARA APOYO</h2>
+    <button class="btn-export" (click)="exportarPDF()">Exportar a PDF</button>
   </div>
-  <app-pagination [totalItems]="totalItems" [currentPage]="currentPage" (currentPageChange)="currentPage = $event" [itemsPerPage]="itemsPerPage" (pageChanged)="cargarSolicitantes()"></app-pagination>
+  <div class="table-container">
+    <table id="tabla">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Estatus</th>
+          <th>Monto aprobado</th>
+          <th>Catálogos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let solicitante of solicitantes | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
+          <td>{{ solicitante.reqSolicitante.nombre }} {{ solicitante.reqSolicitante.primerApellido }} {{
+            solicitante.reqSolicitante.segundoApellido }}</td>
+          <td>{{ solicitante.reqSolicitante.estatus }}</td>
+          <td>{{ solicitante.reqSolicitante.montoAprobado }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editarSolicitante(solicitante)">
+              <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+            </button>
+            <select *ngIf="!solicitante.isEditing" #selectElement
+              (change)="cambiarEstatus(solicitante, selectElement.value)" class="form-control form-control-sm">
+              <option value="---Seleccionar---">Seleccionar</option>
+              <option value="autorizar">Autorizar</option>
+              <option value="rechazar">Rechazar</option>
+            </select>
+          </td>
+        </tr>
+        <!-- Editing section -->
+        <!-- Editing section -->
+        <tr *ngIf="solicitanteEditar.isEditing" class="editing-row">
+          <td colspan="4">
+            <div class="editing-section">
+              <h3>Editar Solicitante</h3>
+              <form>
+                <div class="form-group">
+                  <label for="nombre">Nombre:</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.nombre">
+                </div>
+                <div class="form-group">
+                  <label for="primerApellido">Primer Apellido:</label>
+                  <input type="text" class="form-control" id="primerApellido" name="primerApellido"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.primerApellido">
+                </div>
+                <div class="form-group">
+                  <label for="segundoApellido">Segundo Apellido:</label>
+                  <input type="text" class="form-control" id="segundoApellido" name="segundoApellido"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.segundoApellido">
+                </div>
+                <div class="form-group">
+                  <label for="genero">Género:</label>
+                  <input type="text" class="form-control" id="genero" name="genero"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.genero">
+                </div>
+                <div class="form-group">
+                  <label for="edad">Edad:</label>
+                  <input type="number" class="form-control" id="edad" name="edad"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.edad">
+                </div>
+                <div class="form-group">
+                  <label for="correo">Correo:</label>
+                  <input type="email" class="form-control" id="correo" name="correo"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.correo">
+                </div>
+                <div class="form-group">
+                  <label for="fechaAlta">Fecha de Alta:</label>
+                  <input type="text" class="form-control" id="fechaAlta" name="fechaAlta"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.fechaAlta">
+                </div>
+                <div class="form-group">
+                  <label for="montoSolicitado">Monto Solicitado:</label>
+                  <input type="number" class="form-control" id="montoSolicitado" name="montoSolicitado"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.montoSolicitado">
+                </div>
+                <div class="form-group">
+                  <label for="universidad">Universidad:</label>
+                  <input type="text" class="form-control" id="universidad" name="universidad"
+                    [(ngModel)]="solicitanteEditar.reqSolicitante.universidad">
+                </div>
+                <div class="form-group">
+                  <label for="calle">Calle:</label>
+                  <input type="text" class="form-control" id="calle" name="calle"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.calle">
+                </div>
+                <div class="form-group">
+                  <label for="numeroExterior">Número Exterior:</label>
+                  <input type="text" class="form-control" id="numeroExterior" name="numeroExterior"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.numeroExterior">
+                </div>
+                <div class="form-group">
+                  <label for="numeroInterior">Número Interior:</label>
+                  <input type="text" class="form-control" id="numeroInterior" name="numeroInterior"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.numeroInterior">
+                </div>
+                <div class="form-group">
+                  <label for="colonia">Colonia:</label>
+                  <input type="text" class="form-control" id="colonia" name="colonia"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.colonia">
+                </div>
+                <div class="form-group">
+                  <label for="ciudad">Ciudad:</label>
+                  <input type="text" class="form-control" id="ciudad" name="ciudad"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.ciudad">
+                </div>
+                <div class="form-group">
+                  <label for="estado">Estado:</label>
+                  <input type="text" class="form-control" id="estado" name="estado"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.estado">
+                </div>
+                <div class="form-group">
+                  <label for="latitud">Latitud:</label>
+                  <input type="text" class="form-control" id="latitud" name="latitud"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.latitud">
+                </div>
+                <div class="form-group">
+                  <label for="longitud">Longitud:</label>
+                  <input type="text" class="form-control" id="longitud" name="longitud"
+                    [(ngModel)]="solicitanteEditar.reqDomicilio.longitud">
+                </div>
+                <button type="button" class="btn-guardar" (click)="guardarCambios()">Guardar Cambios</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-pagination [totalItems]="totalItems" [currentPage]="currentPage" (currentPageChange)="currentPage = $event"
+      [itemsPerPage]="itemsPerPage" (pageChanged)="cargarSolicitantes()"></app-pagination>
+  </div>
+</div>

@@ -46,6 +46,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/menu-admin']);
     } else if (rol === 'CA') {
       this.router.navigate(['/menu-capturador']);
+    } else if (rol === 'VI'){
+      this.mostrarSnackBar('Acceso denegado');
     }
   }
 

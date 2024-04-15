@@ -6,6 +6,7 @@ import { AuthService } from '../auth.service';
 import { forkJoin } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-solicitantes',
@@ -17,8 +18,31 @@ export class SolicitantesComponent implements OnInit {
   totalItems: number = 0;
   currentPage: number = 1;
   itemsPerPage: number = 10;
+  solicitanteEditar: any = {
+    reqSolicitante: {
+      nombre: '',
+      primerApellido: '',
+      segundoApellido: '',
+      genero: '',
+      edad: null,
+      correo: '',
+      fechaAlta: '',
+      montoSolicitado: null,
+      universidad: ''
+    },
+    reqDomicilio: {
+      calle: '',
+      numeroExterior: '',
+      numeroInterior: '',
+      colonia: '',
+      ciudad: '',
+      estado: '',
+      latitud: '',
+      longitud: ''
+    }
+  };
 
-  constructor(private http: HttpClient, private authService: AuthService) { }
+  constructor(private http: HttpClient, private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.cargarSolicitantes();
@@ -29,32 +53,45 @@ export class SolicitantesComponent implements OnInit {
     tokenObservable$.pipe(
       mergeMap(token => {
         const headers = token ? { 'token': token } : {};
-        const visitasPendientes$ = this.http.post('http://localhost:8080/visita/visitasPendientes', { id: '1' }, { headers });
         const solicitantes$ = this.http.get('http://localhost:8080/solicitante/getSolicitantes', { headers });
-        return forkJoin([visitasPendientes$, solicitantes$]);
+        return solicitantes$;
       }),
-      map(([visitasPendientes, solicitantes]: [any, any]) => {
-        const combinedData = solicitantes.solicitante.map((solicitante: any) => {
+      map((response: any) => {
+        return response.solicitante.map((solicitante: any) => {
           return {
-            nombre: solicitante.nombre,
-            estatus: solicitante.estatus,
-            montoAprobado: solicitante.montoAprobado,
-            montoSolicitado: solicitante.montoSolicitado,
-            idSolicitante: solicitante.idSolicitante,
-            primerApellido: solicitante.primerApellido,
-            segundoApellido: solicitante.segundoApellido,
-            genero: solicitante.genero,
-            edad: solicitante.edad
+            id: solicitante.idSolicitante,
+            reqSolicitante: {
+              nombre: solicitante.nombre,
+              primerApellido: solicitante.primerApellido,
+              segundoApellido: solicitante.segundoApellido,
+              estatus: solicitante.estatus,
+              montoAprobado: solicitante.montoAprobado,
+              montoSolicitado: solicitante.montoSolicitado,
+              genero: solicitante.genero,
+              edad: solicitante.edad,
+              correo: solicitante.correo,
+              fechaAlta: solicitante.fechaAlta,
+              universidad: solicitante.universidad
+            },
+            reqDomicilio: {
+              calle: solicitante.calle,
+              numeroExterior: solicitante.numeroExterior,
+              numeroInterior: solicitante.numeroInterior,
+              colonia: solicitante.colonia,
+              ciudad: solicitante.ciudad,
+              estado: solicitante.estado,
+              latitud: solicitante.latitud,
+              longitud: solicitante.longitud,
+            },
+            isEditing: false // Initialize isEditing flag to false
           };
         });
-        return combinedData;
       })
-    ).subscribe((combinedData: any[]) => {
-      this.solicitantes = combinedData;
+    ).subscribe((solicitantes: any[]) => {
+      this.solicitantes = solicitantes;
       this.totalItems = this.solicitantes.length;
     });
   }
-
 
   cambiarEstatus(solicitante: any, estatus: string) {
     const tokenObservable$ = of(this.authService.getToken());
@@ -71,8 +108,8 @@ export class SolicitantesComponent implements OnInit {
         }
 
         console.log(solicitante);
-        console.log(solicitante.idSolicitante);
-        const body = { id: solicitante.idSolicitante };
+        console.log(solicitante.id);
+        const body = { id: solicitante.id };
 
         return this.http.put(url, body, { headers });
       })
@@ -92,12 +129,12 @@ export class SolicitantesComponent implements OnInit {
     const doc = new (jsPDF as any)();
     const tableHeader = ['Nombre', 'Estatus de Apoyo', 'Genero', 'Edad', 'Monto Solicitado', 'Monto Aprobado'];
     const tableRows = this.solicitantes.map(solicitante => [
-      `${solicitante.nombre} ${solicitante.primerApellido} ${solicitante.segundoApellido}`,
-      solicitante.estatus,
-      solicitante.genero,
-      solicitante.edad,
-      solicitante.montoSolicitado,
-      solicitante.montoAprobado
+      `${solicitante.reqSolicitante.nombre} ${solicitante.reqSolicitante.primerApellido} ${solicitante.reqSolicitante.segundoApellido}`,
+      solicitante.reqSolicitante.estatus,
+      solicitante.reqSolicitante.genero,
+      solicitante.reqSolicitante.edad,
+      solicitante.reqSolicitante.montoSolicitado,
+      solicitante.reqSolicitante.montoAprobado
     ]);
 
     doc.setFontSize(18);
@@ -124,6 +161,49 @@ export class SolicitantesComponent implements OnInit {
     doc.save('tabla.pdf');
   }
 
+  editarSolicitante(solicitante: any) {
+    if (solicitante && solicitante.reqSolicitante && solicitante.reqDomicilio) {
+      // Desactivar la edición de todos los solicitantes
+      this.solicitantes.forEach(s => s.isEditing = false);
+      // Activar la edición solo para el solicitante seleccionado
+      solicitante.isEditing = !solicitante.isEditing;
+      // Si la edición está activada, establecer el solicitante a editar
+      if (solicitante.isEditing) {
+        this.solicitanteEditar = { ...solicitante };
+      } else {
+        this.solicitanteEditar = null;
+      }
+    } else {
+      console.error('Estructura de datos inválida');
+    }
+  }
+  
+
+  guardarCambios() {
+    if (!this.solicitanteEditar) {
+      console.error('No hay solicitante seleccionado para editar');
+      return;
+    }
+
+    const token = this.authService.getToken();
+    const headers = token ? { 'token': token } : {};
+
+    const body = {
+      id: this.solicitanteEditar.reqSolicitante.id,
+      reqSolicitante: { ...this.solicitanteEditar.reqSolicitante },
+      reqDomicilio: { ...this.solicitanteEditar.reqDomicilio }
+    };
+
+    this.http.put('http://localhost:8080/solicitante/editar', body, { headers })
+      .subscribe(
+        response => {
+          console.log('Solicitante editado exitosamente:', response);
+          this.solicitanteEditar = null; // Limpiar el solicitante a editar
+          this.cargarSolicitantes(); // Volver a cargar los solicitantes
+        },
+        error => {
+          console.error('Error al editar el solicitante:', error);
+        }
+      );
+  }
 }
-
-

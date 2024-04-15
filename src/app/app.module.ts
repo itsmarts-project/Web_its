@@ -19,7 +19,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { FormularioSolicitudComponent } from './formulario-solicitud/formulario-solicitud.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { DesbloquearUsuarioComponent } from './desbloquear-usuario/desbloquear-usuario.component';
-import { SolicitanteEditarComponent } from './solicitante-editar/solicitante-editar.component';
+
 
 
 @NgModule({
@@ -36,8 +36,7 @@ import { SolicitanteEditarComponent } from './solicitante-editar/solicitante-edi
     PaginationComponent,
     FormularioSolicitudComponent,
     ForgotPasswordComponent,
-    DesbloquearUsuarioComponent,
-    SolicitanteEditarComponent
+    DesbloquearUsuarioComponent
   ],
   imports: [
     BrowserModule,
