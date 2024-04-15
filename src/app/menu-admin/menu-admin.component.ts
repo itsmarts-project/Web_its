@@ -15,7 +15,7 @@ export class MenuAdminComponent {
   }
 
   navigateToEstatusVisita(){
-    this.router.navigate(['/solicitante-table']);
+    this.router.navigate(['/solicitantes']);
   }
 
   navigateToPermisosUsuario(){

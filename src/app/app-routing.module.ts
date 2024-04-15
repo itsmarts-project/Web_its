@@ -5,8 +5,10 @@ import { LoginComponent } from './login/login.component';
 import { MenuCapturadorComponent } from './menu-capturador/menu-capturador.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { PermisosUsuarioComponent } from './permisos-usuario/permisos-usuario.component';
+import { SolicitantesComponent } from './solicitantes/solicitantes.component';
 import { FormularioSolicitudComponent } from './formulario-solicitud/formulario-solicitud.component';
-import { SolicitanteTableComponent } from './solicitante-table/solicitante-table.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { DesbloquearUsuarioComponent } from './desbloquear-usuario/desbloquear-usuario.component';
 
 const routes: Routes = [
   { path: '', component: SplashScreenComponent, pathMatch: 'full' },
@@ -14,8 +16,10 @@ const routes: Routes = [
   { path: 'menu-admin', component: MenuAdminComponent },
   { path: 'menu-capturador', component: MenuCapturadorComponent },
   { path: 'permisos-usuario', component: PermisosUsuarioComponent },
-  { path: 'formulario-solicitud', component: FormularioSolicitudComponent},
-  { path: 'solicitante-table', component: SolicitanteTableComponent},
+  { path: 'solicitantes', component: SolicitantesComponent },
+  { path: 'formulario-solicitud', component: FormularioSolicitudComponent },
+  { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'desbloquear-usuario', component: DesbloquearUsuarioComponent },
   { path: '**', redirectTo: '' }
 ];
 

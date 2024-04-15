@@ -1,0 +1,35 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="header">
+      <h2 class="title">LISTADO DE CANDIDATOS PARA APOYO</h2>
+      <button class="btn-export" (click)="exportarPDF()">Exportar a PDF</button>
+    </div>
+    <div class="table-container">
+      <table id="tabla">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Estatus</th>
+            <th>Monto aprobado</th>
+            <th>Catálogos</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let solicitante of solicitantes | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
+            <td>{{ solicitante.nombre }} {{ solicitante.primerApellido }} {{ solicitante.segundoApellido }}</td>
+            <td>{{ solicitante.estatus }}</td>
+            <td>{{ solicitante.montoAprobado }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm"><i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i></button>
+              <select #selectElement (change)="cambiarEstatus(solicitante, selectElement.value)" class="form-control form-control-sm">
+                <option value="---Seleccionar---">---Seleccionar---</option>
+                <option value="autorizar">Autorizar</option>
+                <option value="rechazar">Rechazar</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <app-pagination [totalItems]="totalItems" [currentPage]="currentPage" (currentPageChange)="currentPage = $event" [itemsPerPage]="itemsPerPage" (pageChanged)="cargarSolicitantes()"></app-pagination>

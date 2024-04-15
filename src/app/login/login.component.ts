@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar'; // Importa MatSnackBar
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   correo: string;
   contrasenia: string;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
   }
@@ -29,11 +30,13 @@ export class LoginComponent implements OnInit {
               },
               (_error) => {
                 console.log('Error al iniciar sesión', _error);
+                this.mostrarSnackBar('Error al iniciar sesión. Por favor, intente nuevamente.');
               }
             );
         },
         (error) => {
           console.log('Error al obtener el rol del usuario', error);
+          this.mostrarSnackBar('Error al ingresar. Por favor, intente nuevamente.');
         }
       );
   }
@@ -44,5 +47,14 @@ export class LoginComponent implements OnInit {
     } else if (rol === 'CA') {
       this.router.navigate(['/menu-capturador']);
     }
+  }
+
+  mostrarSnackBar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000, // Duración en milisegundos
+      horizontalPosition: 'center', // Posición horizontal
+      verticalPosition: 'top', // Posición vertical
+      panelClass: ['error-snackbar'] // Clase CSS adicional para personalizar el estilo
+    });
   }
 }
