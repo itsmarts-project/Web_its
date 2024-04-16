@@ -28,7 +28,7 @@ export class UsuariosComponent implements OnInit {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('token', token || '');
 
-    this.http.get<any>('http://localhost:8080/usuario/', { headers })
+    this.http.get<any>('https://geoapoyosapi-46nub.ondigitalocean.app/usuario/', { headers })
       .subscribe(response => {
         this.usuarios = response.usuario;
         this.totalItems = this.usuarios.length;
@@ -60,11 +60,11 @@ export class UsuariosComponent implements OnInit {
       .set('Content-Type', 'application/json')
       .set('token', token || '');
   
-    let url = 'http://localhost:8080/usuario/registrarUsuario';
+    let url = 'https://geoapoyosapi-46nub.ondigitalocean.app/usuario/registrarUsuario';
     let method = 'post';
   
     if (this.usuarioEditar.idUsuario) {
-      url = `http://localhost:8080/usuario/editarUsuario`;
+      url = `https://geoapoyosapi-46nub.ondigitalocean.app/usuario/editarUsuario`;
       method = 'put';
     }
   
@@ -140,7 +140,7 @@ export class UsuariosComponent implements OnInit {
 
     const body = { idUsuario: usuario.idUsuario };
 
-    this.http.put<any>('http://localhost:8080/usuario/borrarUsuario', body, { headers })
+    this.http.put<any>('https://geoapoyosapi-46nub.ondigitalocean.app/usuario/borrarUsuario', body, { headers })
       .subscribe(() => {
         this.usuarios = this.usuarios.filter(u => u.idUsuario !== usuario.idUsuario);
       });
@@ -152,7 +152,7 @@ export class UsuariosComponent implements OnInit {
 
     const body = { idUsuario: usuario.idUsuario };
 
-    this.http.put<any>('http://localhost:8080/usuario/desbloquearUsuario', body, { headers })
+    this.http.put<any>('https://geoapoyosapi-46nub.ondigitalocean.app/usuario/desbloquearUsuario', body, { headers })
       .subscribe(response => {
         const index = this.usuarios.findIndex(u => u.idUsuario === response.usuario.idUsuario);
         this.usuarios[index] = response.usuario;

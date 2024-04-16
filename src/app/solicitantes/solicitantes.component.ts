@@ -51,7 +51,7 @@ export class SolicitantesComponent implements OnInit {
   cargarSolicitantes() {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('token', token || '');
-    this.http.get<any>('http://localhost:8080/solicitante/solicitantes', { headers })
+    this.http.get<any>('https://geoapoyosapi-46nub.ondigitalocean.app/solicitante/solicitantes', { headers })
       .pipe(
         map(response => response.solicitante.map(solicitante => ({
           id: solicitante.idSolicitante,
@@ -98,9 +98,9 @@ export class SolicitantesComponent implements OnInit {
         let url;
 
         if (estatus === 'autorizar') {
-          url = 'http://localhost:8080/beca/aprobar';
+          url = 'https://geoapoyosapi-46nub.ondigitalocean.app/beca/aprobar';
         } else {
-          url = 'http://localhost:8080/beca/rechazar';
+          url = 'https://geoapoyosapi-46nub.ondigitalocean.app/beca/rechazar';
         }
 
         console.log(solicitante);
@@ -191,7 +191,7 @@ export class SolicitantesComponent implements OnInit {
       reqSolicitante: { ...this.solicitanteEditar.reqSolicitante },
       reqDomicilio: { ...this.solicitanteEditar.reqDomicilio }
     };
-    this.http.put('http://localhost:8080/solicitante/editar', body, { headers })
+    this.http.put('https://geoapoyosapi-46nub.ondigitalocean.app/solicitante/editar', body, { headers })
       .subscribe(
         response => {
           console.log('Solicitante editado exitosamente:', response);
@@ -208,7 +208,7 @@ export class SolicitantesComponent implements OnInit {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('token', token || '');
     const body = { id };
-    this.http.post<any>('http://localhost:8080/solicitante/solicitante', body, { headers })
+    this.http.post<any>('https://geoapoyosapi-46nub.ondigitalocean.app/solicitante/solicitante', body, { headers })
       .pipe(
         map(response => ({
           reqSolicitante: {

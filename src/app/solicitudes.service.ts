@@ -8,7 +8,7 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root'
 })
 export class SolicitudesService {
-  private apiUrl = 'http://localhost:8080';
+  private apiUrl = 'https://geoapoyosapi-46nub.ondigitalocean.app';
 
   constructor(private http: HttpClient, private authService: AuthService) { }
 

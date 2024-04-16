@@ -15,7 +15,7 @@ export class ForgotPasswordComponent {
   constructor(private http: HttpClient){}
 
   resetPassword() {
-    const url = 'http://localhost:8080/login/correoRestablecer';
+    const url = 'https://geoapoyosapi-46nub.ondigitalocean.app/login/correoRestablecer';
     const data = { correo: this.email };
   
     this.http.post<any>(url, data)

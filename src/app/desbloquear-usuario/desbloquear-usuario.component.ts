@@ -15,7 +15,7 @@ export class DesbloquearUsuarioComponent {
   constructor(private http: HttpClient){}
 
   userUnlock() {
-    const url = 'http://localhost:8080/login/correoDesbloquear';
+    const url = 'https://geoapoyosapi-46nub.ondigitalocean.app/login/correoRestablecer';
     const data = { correo: this.email };
   
     this.http.post<any>(url, data)

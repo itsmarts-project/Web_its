@@ -30,7 +30,7 @@ export class AuthService {
 
   getRolUsuario(correo: string): Observable<any> {
     const body = { correo };
-    return this.http.post('http://localhost:8080/usuario/traerRolUsuario', body)
+    return this.http.post('https://geoapoyosapi-46nub.ondigitalocean.app/usuario/traerRolUsuario', body)
       .pipe(
         map((response: any) => {
           const userInfo = {
@@ -50,7 +50,7 @@ export class AuthService {
 
   login(correo: string, contrasenia: string, idUsuario: string): Observable<any> {
     const body = { correo, contrasenia };
-    return this.http.post('http://localhost:8080/login', body)
+    return this.http.post('https://geoapoyosapi-46nub.ondigitalocean.app/login/', body)
       .pipe(
         tap((response: any) => {
           const token = response.token;
@@ -83,7 +83,7 @@ export class AuthService {
 
   bloquearUsuario(idUsuario: string): void {
     const body = { idUsuario };
-    this.http.post('http://localhost:8080/usuarios/bloquearUsuario', body)
+    this.http.post('https://geoapoyosapi-46nub.ondigitalocean.app/usuario/bloquearUsuario', body)
       .subscribe(
         (response) => {
           console.log('Usuario bloqueado:', response);
