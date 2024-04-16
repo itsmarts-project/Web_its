@@ -12,7 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { MenuCapturadorComponent } from './menu-capturador/menu-capturador.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { PermisosUsuarioComponent } from './permisos-usuario/permisos-usuario.component';
+import { UsuariosComponent } from './permisos-usuario/permisos-usuario.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { SolicitantesComponent } from './solicitantes/solicitantes.component';
 import { PaginationComponent } from './pagination/pagination.component';
@@ -31,7 +31,7 @@ import { DesbloquearUsuarioComponent } from './desbloquear-usuario/desbloquear-u
     MenuCapturadorComponent,
     MenuAdminComponent,
     NavbarComponent,
-    PermisosUsuarioComponent,
+    UsuariosComponent,
     SolicitantesComponent,
     PaginationComponent,
     FormularioSolicitudComponent,

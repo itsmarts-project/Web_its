@@ -49,49 +49,45 @@ export class SolicitantesComponent implements OnInit {
   }
 
   cargarSolicitantes() {
-    const tokenObservable$ = of(this.authService.getToken());
-    tokenObservable$.pipe(
-      mergeMap(token => {
-        const headers = token ? { 'token': token } : {};
-        const solicitantes$ = this.http.get('http://localhost:8080/solicitante/getSolicitantes', { headers });
-        return solicitantes$;
-      }),
-      map((response: any) => {
-        return response.solicitante.map((solicitante: any) => {
-          return {
-            id: solicitante.idSolicitante,
-            reqSolicitante: {
-              nombre: solicitante.nombre,
-              primerApellido: solicitante.primerApellido,
-              segundoApellido: solicitante.segundoApellido,
-              estatus: solicitante.estatus,
-              montoAprobado: solicitante.montoAprobado,
-              montoSolicitado: solicitante.montoSolicitado,
-              genero: solicitante.genero,
-              edad: solicitante.edad,
-              correo: solicitante.correo,
-              fechaAlta: solicitante.fechaAlta,
-              universidad: solicitante.universidad
-            },
-            reqDomicilio: {
-              calle: solicitante.calle,
-              numeroExterior: solicitante.numeroExterior,
-              numeroInterior: solicitante.numeroInterior,
-              colonia: solicitante.colonia,
-              ciudad: solicitante.ciudad,
-              estado: solicitante.estado,
-              latitud: solicitante.latitud,
-              longitud: solicitante.longitud,
-            },
-            isEditing: false // Initialize isEditing flag to false
-          };
-        });
-      })
-    ).subscribe((solicitantes: any[]) => {
-      this.solicitantes = solicitantes;
-      this.totalItems = this.solicitantes.length;
-    });
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('token', token || '');
+    this.http.get<any>('http://localhost:8080/solicitante/solicitantes', { headers })
+      .pipe(
+        map(response => response.solicitante.map(solicitante => ({
+          id: solicitante.idSolicitante,
+          reqSolicitante: {
+            nombre: solicitante.nombre,
+            primerApellido: solicitante.primerApellido,
+            segundoApellido: solicitante.segundoApellido,
+            estatus: solicitante.estatus,
+            montoAprobado: solicitante.montoAprobado,
+            montoSolicitado: solicitante.montoSolicitado,
+            genero: solicitante.genero,
+            edad: solicitante.edad,
+            correo: solicitante.correo,
+            fechaAlta: solicitante.fechaAlta,
+            universidad: solicitante.universidad
+          },
+          reqDomicilio: {
+            calle: solicitante.calle,
+            numeroExterior: solicitante.numeroExterior,
+            numeroInterior: solicitante.numeroInterior,
+            colonia: solicitante.colonia,
+            ciudad: solicitante.ciudad,
+            estado: solicitante.estado,
+            latitud: solicitante.latitud,
+            longitud: solicitante.longitud
+          },
+          isEditing: false
+        }))),
+      )
+      .subscribe(solicitantes => {
+        this.solicitantes = solicitantes;
+        this.totalItems = this.solicitantes.length;
+      });
   }
+
+
 
   cambiarEstatus(solicitante: any, estatus: string) {
     const tokenObservable$ = of(this.authService.getToken());
@@ -162,22 +158,25 @@ export class SolicitantesComponent implements OnInit {
   }
 
   editarSolicitante(solicitante: any) {
-    if (solicitante && solicitante.reqSolicitante && solicitante.reqDomicilio) {
-      // Desactivar la edición de todos los solicitantes
-      this.solicitantes.forEach(s => s.isEditing = false);
-      // Activar la edición solo para el solicitante seleccionado
-      solicitante.isEditing = !solicitante.isEditing;
-      // Si la edición está activada, establecer el solicitante a editar
-      if (solicitante.isEditing) {
-        this.solicitanteEditar = { ...solicitante };
-      } else {
-        this.solicitanteEditar = null;
-      }
+    // Establish a flag to track the editing state of each solicitante
+    this.solicitantes.forEach(s => s.isEditing = false);
+  
+    // Find the selected solicitante and toggle its editing state
+    const index = this.solicitantes.findIndex(s => s === solicitante);
+    if (index !== -1) {
+      this.solicitantes[index].isEditing = !this.solicitantes[index].isEditing;
+    }
+  
+    // Load the selected solicitante if it's in editing mode
+    if (solicitante.isEditing) {
+      this.cargarSolicitantePorId(solicitante.id);
     } else {
-      console.error('Estructura de datos inválida');
+      this.solicitanteEditar = null;
     }
   }
   
+  
+
 
   guardarCambios() {
     if (!this.solicitanteEditar) {
@@ -185,25 +184,60 @@ export class SolicitantesComponent implements OnInit {
       return;
     }
 
-    const token = this.authService.getToken();
-    const headers = token ? { 'token': token } : {};
-
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('token', token || '');
     const body = {
       id: this.solicitanteEditar.reqSolicitante.id,
       reqSolicitante: { ...this.solicitanteEditar.reqSolicitante },
       reqDomicilio: { ...this.solicitanteEditar.reqDomicilio }
     };
-
     this.http.put('http://localhost:8080/solicitante/editar', body, { headers })
       .subscribe(
         response => {
           console.log('Solicitante editado exitosamente:', response);
-          this.solicitanteEditar = null; // Limpiar el solicitante a editar
-          this.cargarSolicitantes(); // Volver a cargar los solicitantes
+          this.solicitanteEditar = null;
+          this.cargarSolicitantes();
         },
         error => {
           console.error('Error al editar el solicitante:', error);
         }
       );
+  }
+
+  cargarSolicitantePorId(id: number) {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set('token', token || '');
+    const body = { id };
+    this.http.post<any>('http://localhost:8080/solicitante/solicitante', body, { headers })
+      .pipe(
+        map(response => ({
+          reqSolicitante: {
+            id: response.solicitante.idSolicitante,
+            nombre: response.solicitante.nombre,
+            primerApellido: response.solicitante.primerApellido,
+            segundoApellido: response.solicitante.segundoApellido,
+            genero: response.solicitante.genero,
+            edad: response.solicitante.edad,
+            correo: response.solicitante.correo,
+            fechaAlta: response.solicitante.fechaAlta,
+            montoSolicitado: response.solicitante.montoSolicitado,
+            universidad: response.solicitante.universidad
+          },
+          reqDomicilio: {
+            calle: response.domicilio.calle,
+            numeroExterior: response.domicilio.numeroExterior,
+            numeroInterior: response.domicilio.numeroInterior,
+            colonia: response.domicilio.colonia,
+            ciudad: response.domicilio.ciudad,
+            estado: response.domicilio.estado,
+            latitud: response.domicilio.latitud,
+            longitud: response.domicilio.longitud
+          },
+          isEditing: true // Set the isEditing property to true
+        }))
+      )
+      .subscribe(solicitante => {
+        this.solicitanteEditar = solicitante;
+      });
   }
 }

@@ -4,7 +4,7 @@ import { SplashScreenComponent } from './splash-screen/splash-screen.component';
 import { LoginComponent } from './login/login.component';
 import { MenuCapturadorComponent } from './menu-capturador/menu-capturador.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
-import { PermisosUsuarioComponent } from './permisos-usuario/permisos-usuario.component';
+import { UsuariosComponent } from './permisos-usuario/permisos-usuario.component';
 import { SolicitantesComponent } from './solicitantes/solicitantes.component';
 import { FormularioSolicitudComponent } from './formulario-solicitud/formulario-solicitud.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
@@ -16,7 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'menu-admin', component: MenuAdminComponent },
   { path: 'menu-capturador', component: MenuCapturadorComponent },
-  { path: 'permisos-usuario', component: PermisosUsuarioComponent },
+  { path: 'permisos-usuario', component: UsuariosComponent },
   { path: 'solicitantes', component: SolicitantesComponent },
   { path: 'formulario-solicitud', component: FormularioSolicitudComponent },
   { path: 'forgot-password', component: ForgotPasswordComponent },

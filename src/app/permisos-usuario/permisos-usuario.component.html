@@ -1,1 +1,89 @@
-<p>permisos-usuario works!</p>
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="header">
+    <h2 class="title">LISTADO DE USUARIOS</h2>
+    <button class="btn-export" (click)="exportarPDF()">Exportar a PDF</button>
+  </div>
+  <div class="table-container">
+    <table id="tabla">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th>Puesto</th>
+          <th>Correo</th>
+          <th>Estatus</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let usuario of usuarios | slice: (currentPage - 1) * itemsPerPage : currentPage * itemsPerPage">
+          <td>{{ usuario.idUsuario }}</td>
+          <td>{{ usuario.nombre }} {{ usuario.primerApellido }} {{ usuario.segundoApellido }}</td>
+          <td>{{ usuario.puesto }}</td>
+          <td>{{ usuario.correo }}</td>
+          <td>{{ usuario.estatus }}</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="editarUsuario(usuario)">
+              <i class="fa-regular fa-pen-to-square" style="color: #ffffff;"></i>
+            </button>
+            <button class="btn btn-danger btn-sm" (click)="eliminarUsuario(usuario)">
+              <i class="fa-regular fa-trash-can" style="color: #ffffff;"></i>
+            </button>
+            <button class="btn btn-success btn-sm" *ngIf="usuario.estatus === 'BL'" (click)="desbloquearUsuario(usuario)">
+              Desbloquear
+            </button>
+          </td>
+        </tr>
+        <!-- Editing section -->
+        <tr *ngIf="usuarioEditar" class="editing-row">
+          <td colspan="6">
+            <div class="editing-section">
+              <h3>Editar Usuario</h3>
+              <form>
+                <div class="form-group">
+                  <label for="nombre">Nombre:</label>
+                  <input type="text" class="form-control" id="nombre" name="nombre"
+                    [(ngModel)]="usuarioEditar.nombre">
+                </div>
+                <div class="form-group">
+                  <label for="primerApellido">Primer Apellido:</label>
+                  <input type="text" class="form-control" id="primerApellido" name="primerApellido"
+                    [(ngModel)]="usuarioEditar.primerApellido">
+                </div>
+                <div class="form-group">
+                  <label for="segundoApellido">Segundo Apellido:</label>
+                  <input type="text" class="form-control" id="segundoApellido" name="segundoApellido"
+                    [(ngModel)]="usuarioEditar.segundoApellido">
+                </div>
+                <div class="form-group">
+                  <label for="puesto">Puesto:</label>
+                  <input type="text" class="form-control" id="puesto" name="puesto"
+                    [(ngModel)]="usuarioEditar.puesto">
+                </div>
+                <div class="form-group">
+                  <label for="fechaContratacion">Fecha de Contratación:</label>
+                  <input type="text" class="form-control" id="fechaContratacion" name="fechaContratacion"
+                    [(ngModel)]="usuarioEditar.fechaContratacion">
+                </div>
+                <div class="form-group">
+                  <label for="sueldo">Sueldo:</label>
+                  <input type="number" class="form-control" id="sueldo" name="sueldo"
+                    [(ngModel)]="usuarioEditar.sueldo">
+                </div>
+                <div class="form-group">
+                  <label for="correo">Correo:</label>
+                  <input type="email" class="form-control" id="correo" name="correo"
+                    [(ngModel)]="usuarioEditar.correo">
+                </div>
+                <button type="button" class="btn-guardar" (click)="guardarCambios()">Guardar Cambios</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <app-pagination [totalItems]="totalItems" [currentPage]="currentPage" (currentPageChange)="currentPage = $event"
+      [itemsPerPage]="itemsPerPage" (pageChanged)="getUsuarios()"></app-pagination>
+  </div>
+</div>
