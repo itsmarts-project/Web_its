@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { SolicitudesService } from '../solicitudes.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { GeocodingServiceService } from '../geocoding-service.service';
+
 
 @Component({
   selector: 'app-formulario-solicitud',
@@ -53,7 +55,7 @@ export class FormularioSolicitudComponent {
   };
   fotoSolicitante: File | undefined;
 
-  constructor(private _solicitudesService_: SolicitudesService, private snackBar: MatSnackBar) {}
+  constructor(private _solicitudesService_: SolicitudesService, private snackBar: MatSnackBar, private geocodingService: GeocodingServiceService) {}
 
   onSubmit() {
     if (!this.formCompleted) {
@@ -180,4 +182,20 @@ export class FormularioSolicitudComponent {
     };
     this.fotoSolicitante = undefined;
   }
+
+  getLatLngFromAddress() {
+    const address = `${this.data.domicilio.calle}, ${this.data.domicilio.colonia}, ${this.data.domicilio.ciudad}, ${this.data.domicilio.estado}`;
+    this.geocodingService.getLatLngFromAddress(address)
+      .subscribe(
+        (response) => {
+          this.data.domicilio.latitud = response.lat;
+          this.data.domicilio.longitud = response.lng;
+        },
+        (error) => {
+          this.mostrarSnackBar('Error al obtener la latitud y longitud');
+          console.error('Error al obtener la latitud y longitud:', error.message);
+        }
+      );
+  }
+  
 }

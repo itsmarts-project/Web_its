@@ -54,6 +54,8 @@
                             name="colonia"><br>
                         <input type="text" [(ngModel)]="data.domicilio.ciudad" placeholder="Ciudad" name="ciudad"><br>
                         <input type="text" [(ngModel)]="data.domicilio.estado" placeholder="Estado" name="estado"><br>
+                        <button type="button" class="btn-geo" (click)="getLatLngFromAddress()">Obtener
+                            Ubicación</button>
                     </fieldset>
                     <fieldset>
                         <legend>Ubicación</legend>

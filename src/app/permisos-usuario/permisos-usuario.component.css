@@ -1,0 +1,194 @@
+.usuario-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    color: #333;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 20px;
+
+        .title {
+            margin: 0;
+            margin-left: 300px;
+            color: #00548F;
+            flex: 1;
+            text-align: center;
+        }
+
+        .btn-export {
+            background-color: #00548F;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 40px;
+        }
+
+        .btn-add{
+            margin-left: 20px;
+            background-color: #FF9900;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            height: 40px;
+        }
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+
+        th,
+        td {
+            padding: 10px;
+            text-align: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        th {
+            background-color: #00548F;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e6e6e6;
+        }
+
+        .btn-primary {
+            background-color: #00548F;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            line-height: 1;
+
+            i {
+                font-size: 20px;
+            }
+        }
+
+        .btn-danger {
+            background-color: #1E91E2;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            line-height: 1;
+
+            i {
+                font-size: 20px;
+            }
+        }
+
+        .btn-success {
+            background-color: #FF9900;
+            border: none;
+            color: #fff;
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            line-height: 1;
+
+            i {
+                font-size: 20px;
+            }
+        }
+
+        
+
+        .form-control-sm,
+        .form-control-sm option {
+            text-align: center;
+            height: 40px;
+            width: 100px;
+            border-radius: 8px;
+            padding: 0;
+            line-height: 40px;
+            background-color: #fff;
+        }
+
+        td button {
+            margin-right: 10px;
+        }
+    }
+
+    .editing-row {
+        background-color: #fff;
+
+        .editing-section {
+            padding: 20px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+
+            h3 {
+                color: #343a40;
+                font-size: 20px;
+                margin-bottom: 20px;
+            }
+
+            label {
+                color: #495057;
+                font-size: 16px;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            input[type="email"] {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            select {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 15px;
+                border: 1px solid #ced4da;
+                border-radius: 4px;
+                box-sizing: border-box;
+                background-color: #fff;
+            }
+
+            .btn-guardar {
+                background-color: #1E91E2;
+                border: none;
+                color: white;
+                padding: 10px 20px;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+                border-radius: 10px;
+                transition: background-color 0.3s, color 0.3s;
+
+                &:hover {
+                    background-color: #00548F;
+                }
+            }
+        }
+    }
+}

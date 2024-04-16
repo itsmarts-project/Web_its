@@ -33,3 +33,7 @@
     color: #999;
     cursor: not-allowed;
   }
+
+  li{
+    list-style: none;
+  }

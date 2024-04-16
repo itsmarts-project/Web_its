@@ -156,3 +156,13 @@
     background-color: #00548F;
     color: white;
 }
+
+.btn-geo {
+    background-color: #00548F;
+    color: #fff;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 40px;
+}

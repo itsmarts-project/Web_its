@@ -1,7 +1,10 @@
+// usuario.component.ts
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-usuarios',
@@ -15,7 +18,7 @@ export class UsuariosComponent implements OnInit {
   itemsPerPage: number = 10;
   usuarioEditar: any = null;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private snackBar: MatSnackBar) { }
 
   ngOnInit() {
     this.getUsuarios();
@@ -32,20 +35,69 @@ export class UsuariosComponent implements OnInit {
       });
   }
 
+  abrirAgregarUsuario() {
+    this.usuarioEditar = {
+      idUsuario: null,
+      nombre: '',
+      primerApellido: '',
+      segundoApellido: '',
+      puesto: '',
+      fechaContratacion: '',
+      sueldo: 0,
+      correo: '',
+      contrasenia: ''
+    };
+  }
+
   editarUsuario(usuario: any) {
     this.usuarioEditar = { ...usuario };
   }
 
-  guardarCambios() {
-    if (!this.usuarioEditar) {
-      console.error('No hay usuario seleccionado para editar');
-      return;
-    }
-  
+  guardarUsuario() {
     const token = localStorage.getItem('token');
+  
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('token', token || '');
+  
+    let url = 'http://localhost:8080/usuario/registrarUsuario';
+    let method = 'post';
+  
+    if (this.usuarioEditar.idUsuario) {
+      url = `http://localhost:8080/usuario/editarUsuario`;
+      method = 'put';
+    }
+  
+    // Validations
+    if (!this.usuarioEditar.nombre || this.usuarioEditar.nombre.trim() === '') {
+      this.mostrarSnackBar('Error: Nombre es requerido');
+      return;
+    }
+  
+    if (!this.usuarioEditar.primerApellido || this.usuarioEditar.primerApellido.trim() === '') {
+      this.mostrarSnackBar('Error: Primer Apellido es requerido');
+      return;
+    }
+  
+    if (!this.usuarioEditar.fechaContratacion) {
+      this.mostrarSnackBar('Error: Fecha de Contratación es requerido');
+      return;
+    }
+  
+    if (isNaN(this.usuarioEditar.sueldo) || this.usuarioEditar.sueldo <= 0) {
+      this.mostrarSnackBar('Error: Sueldo debe de ser un numero positivo');
+      return;
+    }
+  
+    if (!this.usuarioEditar.correo || this.usuarioEditar.correo.trim() === '') {
+      this.mostrarSnackBar('Error: Correo es requerido');
+      return;
+    }
+  
+    if (!this.usuarioEditar.contrasenia || this.usuarioEditar.contrasenia.trim() === '') {
+      this.mostrarSnackBar('Error: Contraseña es requerido');
+      return;
+    }
   
     const body = {
       idUsuario: this.usuarioEditar.idUsuario,
@@ -53,30 +105,39 @@ export class UsuariosComponent implements OnInit {
       primerApellido: this.usuarioEditar.primerApellido,
       segundoApellido: this.usuarioEditar.segundoApellido,
       puesto: this.usuarioEditar.puesto,
-      sueldo: this.usuarioEditar.sueldo.toString(), // Asegúrate de convertir el sueldo a string
-      contrasenia: this.usuarioEditar.contrasenia,
-      estatus: this.usuarioEditar.estatus,
-      correo: this.usuarioEditar.correo
+      fechaContratacion: this.usuarioEditar.fechaContratacion,
+      sueldo: this.usuarioEditar.sueldo.toString(),
+      correo: this.usuarioEditar.correo,
+      contrasenia: this.usuarioEditar.contrasenia
     };
-
-    console.log(body);
   
-    this.http.put('http://localhost:8080/usuario/editarUsuario', body, { headers })
+    this.http[method]<any>(url, body, { headers })
       .subscribe(
         response => {
-          console.log('Usuario editado exitosamente:', response);
-          this.usuarioEditar = null;
+          console.log('Usuario guardado exitosamente:', response);
           this.getUsuarios();
+          this.usuarioEditar = null;
         },
         error => {
-          console.error('Error al editar el usuario:', error);
+          console.error('Error al guardar el usuario:', error);
+          this.mostrarSnackBar('Error al guardar el usuario');
         }
       );
+  }
+  
+  mostrarSnackBar(message: string): void {
+    this.snackBar.open(message, 'Cerrar', {
+      duration: 5000, // Duración en milisegundos
+      horizontalPosition: 'center', // Posición horizontal
+      verticalPosition: 'top', // Posición vertical
+      panelClass: ['error-snackbar'] // Clase CSS adicional para personalizar el estilo
+    });
   }
 
   eliminarUsuario(usuario: any) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('token', token || '');
+
     const body = { idUsuario: usuario.idUsuario };
 
     this.http.put<any>('http://localhost:8080/usuario/borrarUsuario', body, { headers })
@@ -88,6 +149,7 @@ export class UsuariosComponent implements OnInit {
   desbloquearUsuario(usuario: any) {
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set('token', token || '');
+
     const body = { idUsuario: usuario.idUsuario };
 
     this.http.put<any>('http://localhost:8080/usuario/desbloquearUsuario', body, { headers })
@@ -110,11 +172,11 @@ export class UsuariosComponent implements OnInit {
 
     doc.setFontSize(18);
     doc.text('LISTADO DE USUARIOS', 20, 20);
-
     doc.setFontSize(12);
+
     const startY = 30;
     const rowHeight = 10;
-    const maxRows = 15; // Número máximo de filas por página
+    const maxRows = 15;
 
     doc.autoTable({
       head: [tableHeader],

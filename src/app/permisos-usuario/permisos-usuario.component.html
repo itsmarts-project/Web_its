@@ -1,8 +1,12 @@
+<!-- usuario.component.html -->
 <app-navbar></app-navbar>
-<div class="container">
+<div class="usuario-container">
   <div class="header">
     <h2 class="title">LISTADO DE USUARIOS</h2>
-    <button class="btn-export" (click)="exportarPDF()">Exportar a PDF</button>
+    <div class="header-actions">
+      <button class="btn-export" (click)="exportarPDF()">Exportar a PDF</button>
+      <button class="btn-add" (click)="abrirAgregarUsuario()">Agregar Usuario</button>
+    </div>
   </div>
   <div class="table-container">
     <table id="tabla">
@@ -30,8 +34,8 @@
             <button class="btn btn-danger btn-sm" (click)="eliminarUsuario(usuario)">
               <i class="fa-regular fa-trash-can" style="color: #ffffff;"></i>
             </button>
-            <button class="btn btn-success btn-sm" *ngIf="usuario.estatus === 'BL'" (click)="desbloquearUsuario(usuario)">
-              Desbloquear
+            <button class="btn btn-success btn-sm" *ngIf="usuario.estatus === 'BA'" (click)="desbloquearUsuario(usuario)">
+              <i class="fa-solid fa-unlock" style="color: #ffffff;"></i>
             </button>
           </td>
         </tr>
@@ -39,7 +43,7 @@
         <tr *ngIf="usuarioEditar" class="editing-row">
           <td colspan="6">
             <div class="editing-section">
-              <h3>Editar Usuario</h3>
+              <h3>{{ usuarioEditar.idUsuario ? 'Editar Usuario' : 'Agregar Usuario' }}</h3>
               <form>
                 <div class="form-group">
                   <label for="nombre">Nombre:</label>
@@ -74,9 +78,14 @@
                 <div class="form-group">
                   <label for="correo">Correo:</label>
                   <input type="email" class="form-control" id="correo" name="correo"
-                    [(ngModel)]="usuarioEditar.correo">
+                    [(ngModel)]="usuarioEditar.correo" [readonly]="usuarioEditar.idUsuario !== null">
                 </div>
-                <button type="button" class="btn-guardar" (click)="guardarCambios()">Guardar Cambios</button>
+                <div class="form-group">
+                  <label for="contrasenia">Contraseña:</label>
+                  <input type="password" class="form-control" id="contrasenia" name="contrasenia"
+                    [(ngModel)]="usuarioEditar.contrasenia">
+                </div>
+                <button type="button" class="btn-guardar" (click)="guardarUsuario()">Guardar</button>
               </form>
             </div>
           </td>
