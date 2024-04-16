@@ -17,7 +17,7 @@
 
 .usuario-container .header .title {
     margin: 0;
-    margin-left: 300px;
+    margin-left: 200px;
     color: #00548F;
     flex: 1;
     text-align: center;
@@ -344,5 +344,229 @@
     .usuario-container .editing-row .editing-section .btn-guardar {
       font-size: 14px;
       padding: 8px 16px;
+    }
+  }
+
+  @media (max-width: 554px) {
+    .usuario-container {
+      padding: 10px;
+    }
+  
+    .usuario-container .header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .usuario-container .header .title {
+      margin-left: 0;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  
+    .usuario-container table {
+      font-size: 12px;
+    }
+  
+    .usuario-container table th,
+    .usuario-container table td {
+      padding: 4px;
+    }
+  
+    .usuario-container table .btn-primary,
+    .usuario-container table .btn-danger,
+    .usuario-container table .btn-success {
+      width: 25px;
+      height: 25px;
+    }
+  
+    .usuario-container table .btn-primary i,
+    .usuario-container table .btn-danger i,
+    .usuario-container table .btn-success i {
+      font-size: 12px;
+    }
+  
+    .usuario-container table .form-control-sm {
+      height: 25px;
+      width: 60px;
+      line-height: 25px;
+    }
+  
+    .usuario-container .editing-row .editing-section input[type="text"],
+    .usuario-container .editing-row .editing-section input[type="number"],
+    .usuario-container .editing-row .editing-section input[type="email"],
+    .usuario-container .editing-row .editing-section input[type="password"],
+    .usuario-container .editing-row .editing-section select {
+      padding: 4px;
+      font-size: 12px;
+    }
+  
+    .usuario-container .editing-row .editing-section .btn-guardar {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+
+  @media (max-width: 524px) {
+    .usuario-container .header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .usuario-container .header .title {
+      font-size: 16px;
+      margin-left: 0;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  
+    .usuario-container table {
+      font-size: 10px;
+    }
+  
+    .usuario-container table th,
+    .usuario-container table td {
+      padding: 3px;
+    }
+  
+    .usuario-container table .btn-primary,
+    .usuario-container table .btn-danger,
+    .usuario-container table .btn-success {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .usuario-container table .btn-primary i,
+    .usuario-container table .btn-danger i,
+    .usuario-container table .btn-success i {
+      font-size: 10px;
+    }
+  
+    .usuario-container table .form-control-sm {
+      height: 20px;
+      width: 50px;
+      line-height: 20px;
+      font-size: 10px;
+    }
+  
+    .usuario-container .editing-row .editing-section input[type="text"],
+    .usuario-container .editing-row .editing-section input[type="number"],
+    .usuario-container .editing-row .editing-section input[type="email"],
+    .usuario-container .editing-row .editing-section input[type="password"],
+    .usuario-container .editing-row .editing-section select {
+      padding: 3px;
+      font-size: 10px;
+    }
+  
+    .usuario-container .editing-row .editing-section .btn-guardar {
+      font-size: 12px;
+      padding: 6px 12px;
+    }
+  }
+
+  @media (max-width: 450px) {
+    .usuario-container {
+      padding: 8px;
+    }
+  
+    .usuario-container .header .title {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+  
+    .usuario-container table {
+      font-size: 8px;
+    }
+  
+    .usuario-container table th,
+    .usuario-container table td {
+      padding: 2px;
+    }
+  
+    .usuario-container table .btn-primary,
+    .usuario-container table .btn-danger,
+    .usuario-container table .btn-success {
+      width: 18px;
+      height: 18px;
+    }
+  
+    .usuario-container table .btn-primary i,
+    .usuario-container table .btn-danger i,
+    .usuario-container table .btn-success i {
+      font-size: 8px;
+    }
+  
+    .usuario-container table .form-control-sm {
+      height: 18px;
+      width: 45px;
+      line-height: 18px;
+      font-size: 8px;
+    }
+  
+    .usuario-container .editing-row .editing-section input[type="text"],
+    .usuario-container .editing-row .editing-section input[type="number"],
+    .usuario-container .editing-row .editing-section input[type="email"],
+    .usuario-container .editing-row .editing-section input[type="password"],
+    .usuario-container .editing-row .editing-section select {
+      padding: 2px;
+      font-size: 8px;
+    }
+  
+    .usuario-container .editing-row .editing-section .btn-guardar {
+      font-size: 10px;
+      padding: 4px 8px;
+    }
+  }
+
+  @media (max-width: 368px) {
+    .usuario-container {
+      padding: 6px;
+    }
+  
+    .usuario-container .header .title {
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+  
+    .usuario-container table {
+      font-size: 6px;
+    }
+  
+    .usuario-container table th,
+    .usuario-container table td {
+      padding: 1px;
+    }
+  
+    .usuario-container table .btn-primary,
+    .usuario-container table .btn-danger,
+    .usuario-container table .btn-success {
+      width: 16px;
+      height: 16px;
+    }
+  
+    .usuario-container table .btn-primary i,
+    .usuario-container table .btn-danger i,
+    .usuario-container table .btn-success i {
+      font-size: 6px;
+    }
+  
+    .usuario-container table .form-control-sm {
+      height: 16px;
+      width: 40px;
+      line-height: 16px;
+      font-size: 6px;
+    }
+  
+    .usuario-container .editing-row .editing-section input[type="text"],
+    .usuario-container .editing-row .editing-section input[type="number"],
+    .usuario-container .editing-row .editing-section input[type="email"],
+    .usuario-container .editing-row .editing-section input[type="password"],
+    .usuario-container .editing-row .editing-section select {
+      padding: 1px;
+      font-size: 6px;
+    }
+  
+    .usuario-container .editing-row .editing-section .btn-guardar {
+      font-size: 8px;
+      padding: 2px 6px;
     }
   }
