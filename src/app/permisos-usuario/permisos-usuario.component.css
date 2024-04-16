@@ -190,3 +190,159 @@
 .usuario-container .editing-row .editing-section .btn-guardar:hover {
     background-color: #00548F;
 }
+
+@media (max-width: 767px) {
+    .usuario-container {
+      margin: 20px;
+      padding: 10px;
+    }
+  
+    .usuario-container .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .usuario-container .header .title {
+      margin-left: 0;
+      text-align: left;
+    }
+  
+    .usuario-container table {
+      font-size: 14px;
+    }
+  
+    .usuario-container table th,
+    .usuario-container table td {
+      padding: 6px;
+    }
+  
+    .usuario-container table .btn-primary,
+    .usuario-container table .btn-danger,
+    .usuario-container table .btn-success {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .usuario-container table .btn-primary i,
+    .usuario-container table .btn-danger i,
+    .usuario-container table .btn-success i {
+      font-size: 16px;
+    }
+  
+    .usuario-container table .form-control-sm {
+      height: 30px;
+      width: 80px;
+      line-height: 30px;
+    }
+  
+    .usuario-container table td button {
+      margin-right: 5px;
+    }
+  
+    .usuario-container .editing-row .editing-section input[type="text"],
+    .usuario-container .editing-row .editing-section input[type="number"],
+    .usuario-container .editing-row .editing-section input[type="email"],
+    .usuario-container .editing-row .editing-section input[type="password"],
+    .usuario-container .editing-row .editing-section select {
+      padding: 6px;
+    }
+  }
+
+  @media (max-width: 620px) {
+    .usuario-container table {
+      font-size: 12px;
+    }
+  
+    .usuario-container table th,
+    .usuario-container table td {
+      padding: 6px;
+    }
+  
+    .usuario-conta  .usuario-container table .btn-danger,
+    .usuario-container table .btn-success {
+      width: 30px;
+      height: 30px;
+    }
+  
+    .usuario-container table .btn-primary i,
+    .usuario-cont  .usuario-container table .btn-success i {
+      font-size: 16px;
+    }
+  
+    .usuario-container table .form-control-sm {
+      height: 30px;
+      width: 70px;
+      line-height: 30px;
+    }
+  
+    .usuario-container table td button {
+      margin-right: 3px;
+    }
+  
+    .usuario-container .editing-row .editing-section input[type="text"],
+    .usuario-container .editing-row .editing-section input[type="number"],
+    .usuario-container .editing-row .editing-section input[type="email"],
+    .usuario-container .editing-row .editing-section input[type="password"],
+    .usuario-container .editing-row .editing-section select {
+      padding: 5px;
+      font-size: 12px;
+    }
+  
+    .usuario-container .editing-row .editing-section .btn-guardar {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .usuario-container .header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .usuario-container .header .title {
+      text-align: center;
+    }
+  
+    .usuario-container table {
+      font-size: 12px;
+    }
+  
+    .usuario-container table th,
+    .usuario-container table td {
+      padding: 4px;
+    }
+  
+    .usuario-container table .btn-primary,
+    .usuario-container table .btn-danger,
+    .usuario-container table .btn-success {
+      width: 25px;
+      height: 25px;
+    }
+  
+    .usuario-container table .btn-primary i,
+    .usuario-container table .btn-danger i,
+    .usuario-container table .btn-success i {
+      font-size: 12px;
+    }
+  
+    .usuario-container table .form-control-sm {
+      height: 25px;
+      width: 60px;
+      line-height: 25px;
+    }
+  
+    .usuario-container .editing-row .editing-section input[type="text"],
+    .usuario-container .editing-row .editing-section input[type="number"],
+    .usuario-container .editing-row .editing-section input[type="email"],
+    .usuario-container .editing-row .editing-section input[type="password"],
+    .usuario-container .editing-row .editing-section select {
+      padding: 4px;
+      font-size: 12px;
+    }
+  
+    .usuario-container .editing-row .editing-section .btn-guardar {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }

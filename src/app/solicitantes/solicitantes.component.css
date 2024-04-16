@@ -73,18 +73,19 @@ tr:hover {
     height: 40px;
     padding: 0;
     line-height: 1;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .btn-primary i {
+    font-size: 20px;
+  }
 
 .form-control-sm,
 .form-control-sm option {
     text-align: center;
 }
-
-
-.btn-primary i {
-    font-size: 20px;
-}
-
 
 .btn-sm {
     padding: 5px 10px;
@@ -95,14 +96,23 @@ tr:hover {
     height: 40px;
     width: 100px;
     border-radius: 8px;
-    padding: 0;
-    line-height: 40px;
+    padding: 0 10px;
+    line-height: normal;
     background-color: #fff;
-}
-
-.form-control-sm option {
+    border: 1px solid #ced4da;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+  }
+  
+  .form-control-sm option {
     padding: 10px;
-}
+    text-align: left;
+  }
+  
+  .form-control-sm::-ms-expand {
+    display: none;
+  }
 
 td button {
     margin-right: 10px;
@@ -169,3 +179,102 @@ td button {
     background-color: #00548F;
   }
   
+
+  @media (max-width: 767px) {
+    .container {
+      margin: 20px;
+      padding: 10px;
+    }
+  
+    .header {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .title {
+      margin-bottom: 10px;
+      text-align: left;
+    }
+  
+    table {
+      font-size: 14px;
+    }
+  
+    th, td {
+      padding: 6px;
+    }
+  
+    .btn-primary {
+        width: 30px;
+        height: 30px;
+      }
+    
+      .btn-primary i {
+        font-size: 16px;
+      }
+  
+      .form-control-sm {
+        height: 30px;
+        width: 80px;
+        padding: 0 5px;
+      }
+  
+    td button {
+      margin-right: 5px;
+    }
+  
+    .editing-section input[type="text"],
+    .editing-section input[type="number"],
+    .editing-section input[type="email"],
+    .editing-section select {
+      padding: 6px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .title {
+      text-align: center;
+    }
+  
+    table {
+      font-size: 12px;
+    }
+  
+    th, td {
+      padding: 4px;
+    }
+  
+    .btn-primary {
+        width: 25px;
+        height: 25px;
+      }
+    
+      .btn-primary i {
+        font-size: 12px;
+      }
+  
+      .form-control-sm {
+        height: 25px;
+        width: 60px;
+        padding: 0 3px;
+        font-size: 12px;
+      }
+  
+    .editing-section input[type="text"],
+    .editing-section input[type="number"],
+    .editing-section input[type="email"],
+    .editing-section select {
+      padding: 4px;
+      font-size: 12px;
+    }
+  
+    .btn-guardar {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
